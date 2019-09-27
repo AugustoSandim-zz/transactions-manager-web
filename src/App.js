@@ -1,9 +1,6 @@
 import React from 'react';
+import Routes from './routes';
 import './App.scss';
-import SignIn from './containers/SignIn';
 
-function App() {
-  return <SignIn />;
-}
-
+const App = () => <Routes />;
 export default App;

@@ -1,9 +1,9 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
-
-import {isAuthenticated} from './services/auth';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import Dashboard from './containers/Dashboard';
 import SignUp from './containers/SignUp';
-import SignIn from './containers/SignIn';
+import { isAuthenticated } from './services/auth';
+
 
 const PrivateRoute = ({component: Component, ...rest}) => (
   <Route
@@ -21,9 +21,9 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 const Routes = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={SignIn} />
+      <Route exact path="/" component={SignUp} />
       <Route path="/signup" component={SignUp} />
-      <PrivateRoute path="/app" component={() => <h1>App</h1>} />
+      <PrivateRoute path="/app" component={Dashboard} />
       <Route path="*" component={() => <h1>Page not found</h1>} />
     </Switch>
   </BrowserRouter>

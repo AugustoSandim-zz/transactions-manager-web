@@ -1,20 +1,21 @@
-import React, {useState} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import {register} from '../../services/auth';
+import React, {useState, useEffect} from 'react';
+import {withRouter} from 'react-router-dom';
+import {login, isAuthenticated} from '../../services/auth';
 
 function SignUp({history}) {
-  const [data, setData] = useState({email: '', password: ''});
+  const [email, setEmail] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
-    password: '',
     credentials: '',
   });
 
+  useEffect(() => {
+    if(isAuthenticated()) history.replace('/app');
+  }, []);
+
   const handleSubmit = async e => {
     e.preventDefault();
-
-    const {email, password} = data;
 
     if (!email) {
       return setErrors({
@@ -23,18 +24,11 @@ function SignUp({history}) {
       });
     }
 
-    if (!password) {
-      return setErrors({
-        ...errors,
-        password: 'Campo obrigatório.',
-      });
-    }
-
     setLoading(true);
 
     try {
-      register(data);
-      history.push('/');
+      login(email);
+      history.push('/app');
     } catch (err) {
       setErrors({
         ...errors,
@@ -46,10 +40,7 @@ function SignUp({history}) {
   };
 
   const handleChange = e => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+    setEmail(e.target.value);
     setErrors({
       ...errors,
       credentials: '',
@@ -59,7 +50,7 @@ function SignUp({history}) {
 
   return (
     <div className="sign-up">
-      <h1>Cadastro</h1>
+      <h1>Cadastro de transações</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -70,20 +61,9 @@ function SignUp({history}) {
         />
         {errors.email && <p>{errors.email}</p>}
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          onChange={handleChange}
-          required
-        />
-        {errors.password && <p>errors.password</p>}
-
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Acessar</button>
 
         {errors.credentials && <p>errors.credentials</p>}
-
-        <Link to="/">Fazer login</Link>
       </form>
     </div>
   );

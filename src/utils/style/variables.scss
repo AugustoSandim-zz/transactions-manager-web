@@ -14,3 +14,21 @@ $large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
 $small-and-down: "only screen and (max-width : #{$small-screen})" !default;
 $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+
+
+// Scale Palette
+//-----------------------------
+$scale13: rgba(0, 0, 0, 0.16);
+$scale12: #4c67b0;
+$scale10: #36a459;
+$scale9: #66ab49;
+$scale8: #8cb13d;
+$scale7: #b4b731;
+$scale6: #dcbe24;
+$scale5: #e4aa23;
+$scale4: #de8a27;
+$scale3: #d7642c;
+$scale2: #d14630;
+$scale1: #c91d36;
+
+$box-shadow: #00000033;

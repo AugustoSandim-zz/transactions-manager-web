@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
 import {login, isAuthenticated} from '../../services/auth';
 
-function SignUp({history}) {
+function Register({history}) {
   const [email, setEmail] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
@@ -11,7 +11,7 @@ function SignUp({history}) {
   });
 
   useEffect(() => {
-    if(isAuthenticated()) history.replace('/app');
+    if(isAuthenticated()) history.replace('/dashboard');
   }, []);
 
   const handleSubmit = async e => {
@@ -28,7 +28,7 @@ function SignUp({history}) {
 
     try {
       login(email);
-      history.push('/app');
+      history.push('/dashboard');
     } catch (err) {
       setErrors({
         ...errors,
@@ -69,4 +69,4 @@ function SignUp({history}) {
   );
 }
 
-export default withRouter(SignUp);
+export default withRouter(Register);

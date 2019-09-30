@@ -1,0 +1,22 @@
+@import "../../utils/style/variables";
+
+.button {
+  background-color: $scale10;
+  font-weight: bold;
+  box-shadow: 1px 1px 2px $box-shadow;
+  min-width: 80px;
+  min-height: 30px;
+  padding: 4px 16px;
+  line-height: 0;
+  pointer-events: all;
+  border: none;
+  color: white;
+  
+  &--disabled {
+    background-color: transparent;
+    border: 1px solid $scale13;
+    color: $scale13;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

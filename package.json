@@ -9,14 +9,16 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-input-mask": "^2.0.4",
+    "react-intl-currency-input": "^0.1.9",
     "react-router-dom": "^5.1.0",
     "react-scripts": "3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,7 +35,35 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "setupFiles": [
+      "./src/test-setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(sass|scss|css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(sass)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/vendor",
+      "/editor/static/"
+    ],
+    "verbose": true,
+    "testURL": "http://localhost:3000/",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-jest": "^24",
+    "jest": "24",
+    "enzyme": "3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "enzyme-to-json": "3.3.5",
     "eslint": "^6.4.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.3.0",
@@ -41,6 +71,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.10.1"
   }
 }

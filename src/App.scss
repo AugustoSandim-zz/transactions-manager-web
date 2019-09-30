@@ -1,15 +1,39 @@
+@import "../src/utils/style/variables.scss";
+@import "../src/utils/style/mixins.scss";
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   outline: 0;
 }
-body,
-html {
-  background: #eee;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  height: 100%;
+  background-color: $background-color;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   text-rendering: optimizeLegibility !important;
   -webkit-font-smoothing: antialiased !important;
   height: 100%;
   width: 100%;
+}
+
+html {
+  @media screen and (min-width: 1024px) {
+    padding: 40px;
+  }
+}
+
+body {
+  @media screen and (min-width: 1024px) {
+    width: 600px;
+    margin: auto;
+    background-color: white;
+    @include box-shadow(0, 0, 5px, #ccc);
+    @include box-sizing(border-box);
+  }
 }

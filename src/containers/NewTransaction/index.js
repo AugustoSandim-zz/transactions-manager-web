@@ -58,7 +58,17 @@ function NewTransaction({history}) {
       return showError({description: 'Digite uma descrição.'});
     }
 
-    return setMessage('Transação cadastrada com sucesso!');
+    try {
+      const transactions =
+        JSON.parse(localStorage.getItem(currentUser())) || [];
+      transactions.push(data);
+
+      localStorage.setItem(currentUser(), JSON.stringify(transactions));
+
+      return setMessage('Transação cadastrada com sucesso!');
+    } catch (error) {
+      return setMessage('Erro ao salvar transação, tente novamente!');
+    }
   };
 
   const handleClick = () => {

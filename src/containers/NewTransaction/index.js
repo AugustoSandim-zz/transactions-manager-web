@@ -27,6 +27,8 @@ function NewTransaction({history}) {
     description: '',
   });
 
+  const [message, setMessage] = useState('');
+
   useEffect(() => {
     currentUser();
   }, []);
@@ -56,7 +58,7 @@ function NewTransaction({history}) {
       return showError({description: 'Digite uma descrição.'});
     }
 
-    return false;
+    return setMessage('Transação cadastrada com sucesso!');
   };
 
   const handleClick = () => {
@@ -95,6 +97,7 @@ function NewTransaction({history}) {
       <button onClick={() => history.goBack()}>Voltar</button>
       <h1>Cadastrar nova transação</h1>
       <form onSubmit={handleSubmit}>
+        {message && <p>{message}</p>}
         <div>
           <label htmlFor="transactionValue">
             Valor da transação

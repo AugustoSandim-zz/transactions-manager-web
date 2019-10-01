@@ -1,17 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {currentUser} from '../../services/auth';
-import './styles.scss';
 import Item from '../../components/Item';
+import {currentUser, logout} from '../../services/auth';
+import {calculateTotal} from '../../utils/calculateAmount';
+import {orderByCreated} from '../../utils/orderListByCreateAt';
+import './styles.scss';
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
-
-  const orderByCreated = list => {
-    return (
-      list && list.sort((a, b) => new Date(b.created) - new Date(a.created))
-    );
-  };
 
   const fetchTransactions = () => {
     const list = JSON.parse(localStorage.getItem(currentUser()));
@@ -24,25 +20,17 @@ function Dashboard() {
     fetchTransactions();
   }, []);
 
-  const calculateTotal = () => {
-    if (!transactions) return 0;
-
-    return transactions.reduce((acc, item) => {
-      return (
-        Number(acc) +
-        Number(item.transactionValue.replace('R$', '').replace(',', '.'))
-      );
-    }, 0);
-  };
-
   const renderTotalValue = () => {
-    return `R$ ${calculateTotal()
+    return `R$ ${calculateTotal(transactions)
       .toFixed(2)
       .replace('.', ',')}`;
   };
 
   return (
     <div className="dashboard">
+      <Link className="dashboard--logout" to="/" onClick={() => logout()}>
+        Sair
+      </Link>
       <h1 className="dashboard__title">Dashboard</h1>
 
       <strong className="dashboard__amount">

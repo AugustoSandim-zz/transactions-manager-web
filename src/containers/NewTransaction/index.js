@@ -11,6 +11,7 @@ function NewTransaction({history}) {
     description: '',
     created: '',
   });
+  const [isLoadind, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     transactionValue: '',
     transactionType: '',
@@ -29,6 +30,7 @@ function NewTransaction({history}) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoading(true);
 
     const {transactionValue, description} = data;
 
@@ -48,7 +50,12 @@ function NewTransaction({history}) {
       localStorage.setItem(currentUser(), JSON.stringify(transactions));
 
       setMessage('Transação cadastrada com sucesso!');
+      setLoading(false);
+      setTimeout(() => {
+        history.push('/dashboard');
+      }, 1000);
     } catch (error) {
+      setLoading(false);
       return setMessage('Erro ao salvar transação, tente novamente!');
     }
   };
@@ -86,7 +93,11 @@ function NewTransaction({history}) {
 
   return (
     <div className="new-transaction">
-      <Link to="/dashboard" title="Voltar para dashboard" className="new-transaction--back">
+      <Link
+        to="/dashboard"
+        title="Voltar para dashboard"
+        className="new-transaction--back"
+      >
         <i className="fa fa-chevron-left" aria-hidden="true" /> Voltar
       </Link>
 
@@ -122,7 +133,7 @@ function NewTransaction({history}) {
             </label>
           </div>
 
-          <Button type="submit" onClick={handleClick}>
+          <Button type="submit" onClick={handleClick} isLoading={isLoadind}>
             Enviar
           </Button>
         </form>

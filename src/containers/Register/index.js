@@ -7,7 +7,6 @@ import './styles.scss';
 
 function Register({history}) {
   const [email, setEmail] = useState('');
-  const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     email: '',
     credentials: '',
@@ -27,8 +26,6 @@ function Register({history}) {
       });
     }
 
-    setLoading(true);
-
     try {
       login(email);
       history.push('/dashboard');
@@ -37,8 +34,6 @@ function Register({history}) {
         ...errors,
         credentials: 'Erro ao efetuar cadastro, tente novamente!',
       });
-    } finally {
-      setLoading(false);
     }
   };
 

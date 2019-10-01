@@ -30,7 +30,6 @@ function NewTransaction({history}) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLoading(true);
 
     const {transactionValue, description} = data;
 
@@ -42,6 +41,8 @@ function NewTransaction({history}) {
       return showError({description: 'Digite uma descrição.'});
     }
 
+    setLoading(true);
+    
     try {
       const transactions =
         JSON.parse(localStorage.getItem(currentUser())) || [];
@@ -50,8 +51,8 @@ function NewTransaction({history}) {
       localStorage.setItem(currentUser(), JSON.stringify(transactions));
 
       setMessage('Transação cadastrada com sucesso!');
-      setLoading(false);
       setTimeout(() => {
+        setLoading(false);
         history.push('/dashboard');
       }, 1000);
     } catch (error) {

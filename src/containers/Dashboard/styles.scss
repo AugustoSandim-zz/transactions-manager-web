@@ -1,5 +1,75 @@
+@import "../../utils/style/variables.scss";
+
 .dashboard {
+  height: 100vh;
+  background: rgba(72, 74, 160, 1);
+  background: linear-gradient(
+    to bottom,
+    rgba(72, 74, 160, 1) 0%,
+    rgba(72, 74, 160, 1) 49.99%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
+  &__title {
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-family: "Oswald", sans-serif;
+  }
+  
+  &__amount {
+    color: white;
+    display: block;
+    font-size: 48px;
+    padding: 0 24px; 
+    
+    span {
+      font-size: 14px;
+    }
+  }
+
   &__container {
-    padding: 24px;
+    display: flex;
+    height: stretch;
+    width: 80%;
+    margin: 40% auto;
+    justify-content: center;
+    flex-flow: row;
+  }
+
+  &__list {
+    &--empty {
+      background-color: white;
+      height: 100px;
+      font-size: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+  }
+
+  &__new-transaction {
+    position: absolute;
+    border: none;
+    background-color: $scale12;
+    border-radius: 50%;
+    color: white;
+    width: 64px;
+    height: 64px;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    bottom: 0;
+    margin: 24px;
+    right: 0;
   }
 }

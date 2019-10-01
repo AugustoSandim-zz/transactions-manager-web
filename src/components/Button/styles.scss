@@ -4,13 +4,16 @@
   background-color: $scale10;
   font-weight: bold;
   box-shadow: 1px 1px 2px $box-shadow;
-  min-width: 80px;
-  min-height: 30px;
-  padding: 4px 16px;
+  min-width: 100px;
+  min-height: 48px;
+  padding: 10px 16px;
+  font-size: 20px;
   line-height: 0;
   pointer-events: all;
   border: none;
+  border-radius: 4px;
   color: white;
+  cursor: pointer;
   
   &--disabled {
     background-color: transparent;

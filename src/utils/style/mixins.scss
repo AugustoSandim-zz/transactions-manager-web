@@ -10,11 +10,6 @@
 	filter: alpha(opacity=($opacity * 100));
 }
 
-@mixin circle
-{
-	@include border-radius(100%);
-}
-
 @mixin vertical-align {
 	position: relative;
 	top: 50%;

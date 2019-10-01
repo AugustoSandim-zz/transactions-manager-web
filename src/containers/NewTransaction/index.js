@@ -1,26 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {withRouter} from 'react-router-dom';
-import {currentUser} from '../../services/auth';
-import InputText from '../../components/InputText';
+import React, {useEffect, useState} from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import Button from '../../components/Button';
-
-/**
- * Transactions
- * code ID
- * type of payment (debit or credit)
- * value
- * description
- * status (Processing, Success and Failed)
- */
+import InputText from '../../components/InputText';
+import {currentUser} from '../../services/auth';
+import './styles.scss';
 
 function NewTransaction({history}) {
   const [data, setData] = useState({
     transactionValue: '',
-    transactionType: 'debit',
     description: '',
     created: '',
   });
-  const [isLoading, setLoading] = useState(false);
   const [errors, setErrors] = useState({
     transactionValue: '',
     transactionType: '',
@@ -35,23 +25,15 @@ function NewTransaction({history}) {
 
   const showError = obj => {
     setErrors(obj);
-    setLoading(false);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    setLoading(true);
 
-    const {transactionValue, transactionType, description} = data;
+    const {transactionValue, description} = data;
 
     if (!transactionValue.replace(/[^\d]/g, '')) {
-      return showError({transactionValue: 'Digite o valor'});
-    }
-
-    if (!transactionType) {
-      return showError({
-        transactionValue: 'Selecione um tipo para a transação',
-      });
+      return showError({transactionValue: 'Favor digite um valor ;)'});
     }
 
     if (!description) {
@@ -104,56 +86,47 @@ function NewTransaction({history}) {
 
   return (
     <div className="new-transaction">
-      <button onClick={() => history.goBack()}>Voltar</button>
-      <h1>Cadastrar nova transação</h1>
-      <form onSubmit={handleSubmit}>
-        {message && <p>{message}</p>}
-        <div>
-          <label htmlFor="transactionValue">
-            Valor da transação
-            <InputText
-              currency
-              type="currency"
-              placeholder="Valor"
-              id="transactionValue"
-              name="transactionValue"
-              onChange={handleCurrencyChange}
-              error={errors.transactionValue}
-            />
-          </label>
-        </div>
+      <Link to="/dashboard" title="Voltar para dashboard" className="new-transaction--back">
+        <i className="fa fa-chevron-left" aria-hidden="true" /> Voltar
+      </Link>
 
-        <div>
-          <label htmlFor="type">
-            Tipo do pagamento
-            <select
-              name="transactionType"
-              onChange={handleChange}
-              error={errors.transactionType}
-            >
-              <option value="debit">Débito</option>
-              <option value="credit">Credito</option>
-            </select>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="description">
-            Descrição
-            <InputText
-              type="text"
-              placeholder="Descrição"
-              id="description"
-              name="description"
-              onChange={handleChange}
-              error={errors.description}
-            />
-          </label>
-        </div>
+      <div className="new-transaction__container">
+        <h1>Cadastrar nova transação</h1>
+        <form onSubmit={handleSubmit}>
+          {message && <p>{message}</p>}
+          <div>
+            <label htmlFor="transactionValue">
+              Valor da transação
+              <InputText
+                currency
+                type="currency"
+                placeholder="Valor"
+                id="transactionValue"
+                name="transactionValue"
+                onChange={handleCurrencyChange}
+                error={errors.transactionValue}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="description">
+              Descrição
+              <InputText
+                type="text"
+                placeholder="Descrição"
+                id="description"
+                name="description"
+                onChange={handleChange}
+                error={errors.description}
+              />
+            </label>
+          </div>
 
-        <Button type="submit" onClick={handleClick}>
-          Enviar
-        </Button>
-      </form>
+          <Button type="submit" onClick={handleClick}>
+            Enviar
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {currentUser} from '../../services/auth';
+import './styles.scss';
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
-  
+
   const orderByCreated = list => {
     return (
       list && list.sort((a, b) => new Date(b.created) - new Date(a.created))
@@ -13,7 +14,6 @@ function Dashboard() {
 
   const fetchTransactions = () => {
     const list = JSON.parse(localStorage.getItem(currentUser()));
-    // Order by date created
     orderByCreated(list);
 
     return setTransactions(list);
@@ -35,27 +35,44 @@ function Dashboard() {
   };
 
   const renderTotalValue = () => {
-    return `TOTAL R$ ${calculateTotal()
+    return `R$ ${calculateTotal()
       .toFixed(2)
       .replace('.', ',')}`;
   };
 
   return (
     <div className="dashboard">
-      <h1>Dashboard</h1>
-      <strong>{renderTotalValue()}</strong>
-      {transactions ? (
-        transactions.map(item => (
-          <li key={item.created}>
-            {item.description} - {item.transactionValue}
-          </li>
-        ))
-      ) : (
-        <>
-          <h3>Nenhuma transação cadastrada!</h3>
-        </>
-      )}
-      <Link to="/nova-transacao">Nova transacao</Link>
+      <h1 className="dashboard__title">Dashboard</h1>
+
+      <strong className="dashboard__amount">
+        <span>Total</span>
+        <br />
+        {renderTotalValue()}
+      </strong>
+
+      <div className="dashboard__container">
+        <div className="dashboard__list">
+          {transactions ? (
+            transactions.map(item => (
+              <li key={item.created}>
+                {item.description} - {item.transactionValue}
+              </li>
+            ))
+          ) : (
+            <div className="dashboard__list--empty">
+              <h3>Nenhuma transação cadastrada!</h3>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <Link
+        to="/nova-transacao"
+        className="dashboard__new-transaction"
+        title="Criar nova transação"
+      >
+        <i className="fa fa-plus" />
+      </Link>
     </div>
   );
 }

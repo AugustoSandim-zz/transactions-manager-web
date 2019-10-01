@@ -4,11 +4,17 @@ import {currentUser} from '../../services/auth';
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
+  
+  const orderByCreated = list => {
+    return (
+      list && list.sort((a, b) => new Date(b.created) - new Date(a.created))
+    );
+  };
 
   const fetchTransactions = () => {
     const list = JSON.parse(localStorage.getItem(currentUser()));
     // Order by date created
-    list.sort((a, b) => new Date(b.created) - new Date(a.created));
+    orderByCreated(list);
 
     return setTransactions(list);
   };

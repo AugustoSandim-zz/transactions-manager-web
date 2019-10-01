@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router-dom';
+import InputText from '../../components/InputText';
 import {login, isAuthenticated} from '../../services/auth';
+
+import './styles.scss';
 
 function Register({history}) {
   const [email, setEmail] = useState('');
@@ -11,7 +14,7 @@ function Register({history}) {
   });
 
   useEffect(() => {
-    if(isAuthenticated()) history.replace('/dashboard');
+    if (isAuthenticated()) history.replace('/dashboard');
   }, []);
 
   const handleSubmit = async e => {
@@ -49,22 +52,25 @@ function Register({history}) {
   };
 
   return (
-    <div className="sign-up">
-      <h1>Cadastro de transações</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Endereço de e-mail"
-          onChange={handleChange}
-          required
-        />
-        {errors.email && <p>{errors.email}</p>}
+    <div className="register">
+      <div className="register__container">
+        <h1>Cadastro de transações</h1>
+        <form onSubmit={handleSubmit}>
+          <InputText
+            type="email"
+            name="email"
+            placeholder="Endereço de e-mail"
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit">Acessar</button>
+          <button type="submit">
+            <i className="fa fa-long-arrow-right" />
+          </button>
 
-        {errors.credentials && <p>errors.credentials</p>}
-      </form>
+          {errors.credentials && <p>errors.credentials</p>}
+        </form>
+      </div>
     </div>
   );
 }

@@ -47,7 +47,7 @@ function NewTransaction({history}) {
 
       localStorage.setItem(currentUser(), JSON.stringify(transactions));
 
-      return setMessage('Transação cadastrada com sucesso!');
+      setMessage('Transação cadastrada com sucesso!');
     } catch (error) {
       return setMessage('Erro ao salvar transação, tente novamente!');
     }
@@ -93,7 +93,7 @@ function NewTransaction({history}) {
       <div className="new-transaction__container">
         <h1>Cadastrar nova transação</h1>
         <form onSubmit={handleSubmit}>
-          {message && <p>{message}</p>}
+          {message && <p className="new-transaction--success">{message}</p>}
           <div>
             <label htmlFor="transactionValue">
               Valor da transação

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {currentUser} from '../../services/auth';
 import './styles.scss';
+import Item from '../../components/Item';
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
@@ -54,9 +55,11 @@ function Dashboard() {
         <div className="dashboard__list">
           {transactions ? (
             transactions.map(item => (
-              <li key={item.created}>
-                {item.description} - {item.transactionValue}
-              </li>
+              <Item
+                key={item.created}
+                value={item.transactionValue}
+                description={item.description}
+              />
             ))
           ) : (
             <div className="dashboard__list--empty">

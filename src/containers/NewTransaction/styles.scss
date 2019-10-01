@@ -16,6 +16,13 @@
     text-decoration: none;
   }
   
+  &--success {
+    color: $scale10;
+    border: 1px solid $scale10;
+    padding: 10px;
+    margin: 20px;
+  }
+  
   &__container {
     padding: 20%;
 

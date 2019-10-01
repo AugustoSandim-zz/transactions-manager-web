@@ -1,0 +1,48 @@
+@import "../../utils/style/variables";
+@import "../../utils/style/mixins";
+
+.item {
+  background-color: white;
+  height: 100px;
+  font-size: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  margin: 10px auto;
+  padding: 0 20px;
+  justify-self: stretch;
+
+  &__icon {
+    font-size: 36px;
+    align-self: center;
+    justify-self: start;
+    border: 1px solid;
+    border-radius: 100px;
+    padding: 10px;
+    color: $accent-color;
+  }
+
+  &__description {
+    align-self: center;
+    justify-self: start;
+    width: 200px;
+    font-size: 18px;
+    font-weight: 200;
+    text-align: left;
+    margin: 0 20px;
+    @extend .truncate;
+  }
+
+  &__value {
+    align-self: center;
+    justify-self: end;
+    flex: 2;
+    float: right;
+    font-weight: bold;
+    font-size: 24px;
+    color: $scale10;
+  }
+}

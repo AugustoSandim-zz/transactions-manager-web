@@ -31,14 +31,18 @@
 
   &__container {
     display: flex;
-    height: stretch;
     width: 80%;
-    margin: 40% auto;
+    margin: 20% auto;
     justify-content: center;
     flex-flow: row;
   }
 
   &__list {
+    width: 100%;
+    overflow-y: auto;
+    padding: 0 10px;
+    height: 60vh;
+    
     &--empty {
       background-color: white;
       height: 100px;

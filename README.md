@@ -32,6 +32,10 @@ Caso tenha algum problema de processamento dos assets execute:
 
 ###Passos resumidos
 >git clone git@github.com:AugustoSandim/transactions-manager-web.git
+
 >npm install
+
 >npm start
+
 >npm test
+

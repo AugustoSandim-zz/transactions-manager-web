@@ -30,7 +30,7 @@ estão funcionando corretamente, para excutar rode o seguinte comando:
 Caso tenha algum problema de processamento dos assets execute:
 `npm rebuild` ele irá reprocessar os assets da aplicação.
 
-###Passos resumidos
+### Passos resumidos
 >git clone git@github.com:AugustoSandim/transactions-manager-web.git
 
 >npm install

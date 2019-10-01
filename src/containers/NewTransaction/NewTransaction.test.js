@@ -16,7 +16,7 @@ describe('NewTransaction', () => {
   it('renders without crashing', () => {
     const component = renderNewTransaction();
 
-    expect(component.find('.new-transaction')).toHaveLength(1);
+    expect(component).toMatchSnapshot();
   });
 
   it('renders the errors when submitted with input values empty', async () => {
@@ -26,7 +26,7 @@ describe('NewTransaction', () => {
     component.find('form').simulate('submit');
     component.update();
 
-    expect(component.text()).toContain('Digite o valor');
+    expect(component.text()).toContain('Favor digite um valor');
   });
 
   it('renders the message success on submitted', () => {

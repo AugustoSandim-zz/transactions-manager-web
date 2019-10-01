@@ -21,7 +21,7 @@ describe('Dashboard', () => {
   it('renders without crashing', () => {
     const component = renderDashboard();
 
-    expect(component.find('.dashboard')).toHaveLength(1);
+    expect(component).toMatchSnapshot();
   });
 
   it('renders message empty list', () => {
